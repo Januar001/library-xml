@@ -26,7 +26,7 @@ class WebPage implements SchemaInterface
             'url' => $this->url,
             'name' => $this->title,
             'description' => $this->description,
-            'isPartOf' => [
+            'publisher' => [
                 '@id' => $this->organizationId
             ]
         ];
