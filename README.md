@@ -17,8 +17,6 @@ Gunakan [Composer](https://getcomposer.org/) untuk menginstal library ini ke dal
 composer require januar001/xml-seo-sitemap
 ```
 
-*(Catatan: Anda mungkin harus menyesuaikan perintah di atas setelah library ini dipublikasikan ke Packagist)*
-
 ## Cara Menggunakan
 
 Berikut adalah langkah demi langkah cara menggunakan library ini untuk membuat sitemap lengkap beserta styling-nya.
