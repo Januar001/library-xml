@@ -145,7 +145,64 @@ $productJson = $jsonLdBuilder->buildForProduct([
     ]
 ]);
 
-// Anda tinggal meng-echo string JSON tersebut ke dalam tag <script> di HTML:
+// D. Generate JSON-LD untuk Bisnis Lokal (Local Business)
+$localBusinessJson = $jsonLdBuilder->buildForLocalBusiness([
+    'url' => 'https://tokomantap.com/kontak',
+    'title' => 'Toko Mantap Jakarta',
+    'description' => 'Kunjungi toko offline kami di Jakarta.',
+    'telephone' => '+6281234567890',
+    'address' => [
+        'streetAddress' => 'Jl. Sudirman No. 1',
+        'addressLocality' => 'Jakarta',
+        'postalCode' => '12190',
+        'addressCountry' => 'ID'
+    ]
+]);
+
+// E. Generate JSON-LD untuk Halaman FAQ (Tanya Jawab)
+$faqJson = $jsonLdBuilder->buildForFAQPage([
+    'url' => 'https://tokomantap.com/faq',
+    'title' => 'Pertanyaan Seputar Toko Mantap',
+    'questionsAndAnswers' => [
+        [
+            'question' => 'Apakah barang original?',
+            'answer' => 'Ya, semua barang 100% original.'
+        ],
+        [
+            'question' => 'Bisa bayar di tempat (COD)?',
+            'answer' => 'Bisa, kami mendukung layanan COD ke seluruh Indonesia.'
+        ]
+    ]
+]);
+
+// F. Generate JSON-LD untuk Resep Makanan
+$recipeJson = $jsonLdBuilder->buildForRecipe([
+    'url' => 'https://tokomantap.com/resep/nasi-goreng',
+    'title' => 'Resep Nasi Goreng Spesial',
+    'description' => 'Cara membuat nasi goreng mantap dengan mudah.',
+    'image' => 'https://tokomantap.com/images/nasgor.jpg',
+    'authorName' => 'Chef Budi',
+    'prepTime' => 'PT15M',
+    'cookTime' => 'PT10M',
+    'recipeYield' => '2 porsi',
+    'recipeIngredient' => ['2 piring nasi putih', '3 siung bawang merah', '1 butir telur'],
+    'recipeInstructions' => ['Panaskan minyak', 'Masukkan telur', 'Masukkan nasi dan bumbu']
+]);
+
+// G. Generate JSON-LD untuk Acara (Event)
+$eventJson = $jsonLdBuilder->buildForEvent([
+    'url' => 'https://tokomantap.com/event/sale-akhir-tahun',
+    'title' => 'Mega Sale Akhir Tahun',
+    'description' => 'Diskon besar-besaran hingga 90%!',
+    'startDate' => '2023-12-25T08:00:00+07:00',
+    'endDate' => '2023-12-31T23:59:00+07:00',
+    'location' => [
+        'name' => 'Toko Mantap Pusat',
+        'address' => ['streetAddress' => 'Jl. Sudirman No. 1', 'addressLocality' => 'Jakarta', 'addressCountry' => 'ID']
+    ]
+]);
+
+// Terakhir, Anda tinggal meng-echo salah satu string JSON yang dihasilkan ke dalam tag <script> di bagian <head> HTML Anda:
 // echo '<script type="application/ld+json">' . $articleJson . '</script>';
 ```
 
