@@ -12,6 +12,7 @@ class LocalBusiness implements SchemaInterface
     private array $address;
     private array $geo;
     private array $openingHoursSpecification;
+    private ?string $priceRange;
 
     public function __construct(
         string $url,
@@ -20,7 +21,8 @@ class LocalBusiness implements SchemaInterface
         string $telephone,
         array $address, // ['streetAddress' => '', 'addressLocality' => '', 'postalCode' => '', 'addressCountry' => '']
         array $geo = [], // ['latitude' => '', 'longitude' => '']
-        array $openingHoursSpecification = [] // [['dayOfWeek' => '...', 'opens' => '...', 'closes' => '...']]
+        array $openingHoursSpecification = [], // [['dayOfWeek' => '...', 'opens' => '...', 'closes' => '...']]
+        ?string $priceRange = null
     ) {
         $this->url = $url;
         $this->name = $name;
@@ -29,6 +31,7 @@ class LocalBusiness implements SchemaInterface
         $this->address = $address;
         $this->geo = $geo;
         $this->openingHoursSpecification = $openingHoursSpecification;
+        $this->priceRange = $priceRange;
     }
 
     public function toArray(): array
@@ -52,6 +55,10 @@ class LocalBusiness implements SchemaInterface
             foreach ($this->openingHoursSpecification as $hours) {
                 $data['openingHoursSpecification'][] = array_merge(['@type' => 'OpeningHoursSpecification'], $hours);
             }
+        }
+
+        if ($this->priceRange !== null) {
+            $data['priceRange'] = $this->priceRange;
         }
 
         return $data;
