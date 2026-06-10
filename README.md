@@ -7,6 +7,7 @@ Library ini mendukung:
 - Sub-sitemap individual (seperti `post-sitemap.xml`)
 - Dukungan Sitemap Gambar (`<image:image>`)
 - Built-in XSLT Stylesheet yang membuat sitemap Anda tampil sebagai tabel rapi ketika diakses di browser.
+- **[BARU]** Smart JSON-LD Generator (Article, Product, WebPage, Organization).
 
 ## Instalasi
 
@@ -80,6 +81,45 @@ $sitemapIndex->addSitemap('https://example.com/page-sitemap.xml', '2023-01-02T12
 // Generate XML-nya dan simpan sebagai file index
 $indexXml = $generator->generateIndex($sitemapIndex);
 file_put_contents($publicDir . '/sitemap_index.xml', $indexXml);
+```
+
+### 4. Membuat Smart JSON-LD (Schema Markup)
+Library ini memiliki "Otak Pintar" untuk merakit JSON-LD ala Yoast SEO (menggabungkan *Organization*, *WebPage*, dan konten secara otomatis). Sangat bagus untuk SEO Google Rich Snippet.
+
+```php
+use SeoSitemap\JsonLd\SmartBuilder;
+
+// A. Inisialisasi Organisasi / Web Anda
+$jsonLdBuilder = new SmartBuilder(
+    'Toko Mantap',
+    'https://tokomantap.com',
+    'https://tokomantap.com/logo.png'
+);
+
+// B. Generate JSON-LD untuk Halaman Artikel Blog
+$articleJson = $jsonLdBuilder->buildForArticle([
+    'url' => 'https://tokomantap.com/blog/sepatu',
+    'title' => 'Cara Memilih Sepatu',
+    'description' => 'Panduan lengkap cara memilih sepatu.',
+    'image' => 'https://tokomantap.com/images/sepatu.jpg',
+    'datePublished' => '2023-10-27T10:00:00+00:00',
+    'authorName' => 'Budi Susanto'
+]);
+
+// C. Generate JSON-LD untuk Halaman Produk (Toko Online)
+$productJson = $jsonLdBuilder->buildForProduct([
+    'url' => 'https://tokomantap.com/produk/sepatu-x1',
+    'name' => 'Sepatu Lari X1',
+    'description' => 'Sepatu lari terbaik.',
+    'image' => 'https://tokomantap.com/images/x1.jpg',
+    'sku' => 'SPT-X1-001',
+    'brand' => 'MantapShoes',
+    'price' => 550000,
+    'priceCurrency' => 'IDR'
+]);
+
+// Anda tinggal meng-echo string JSON tersebut ke dalam tag <script> di HTML:
+// echo '<script type="application/ld+json">' . $articleJson . '</script>';
 ```
 
 ## Referensi Class
