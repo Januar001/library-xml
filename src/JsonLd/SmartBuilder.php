@@ -154,7 +154,7 @@ class SmartBuilder
     /**
      * Builds a comprehensive JSON-LD Graph for a Local Business page.
      * 
-     * @param array $data Expected keys: url, title, description, image, telephone, address, [geo, openingHoursSpecification, breadcrumbs]
+     * @param array $data Expected keys: url, title, description, image, telephone, address, [geo, openingHoursSpecification, priceRange, breadcrumbs]
      * @return string Valid JSON string
      */
     public function buildForLocalBusiness(array $data): string
@@ -185,7 +185,8 @@ class SmartBuilder
             $data['telephone'] ?? '',
             $data['address'] ?? [],
             $data['geo'] ?? [],
-            $data['openingHoursSpecification'] ?? []
+            $data['openingHoursSpecification'] ?? [],
+            $data['priceRange'] ?? null
         );
         $graph->addSchema($localBusiness);
 
