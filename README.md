@@ -17,6 +17,25 @@ Gunakan [Composer](https://getcomposer.org/) untuk menginstal library ini ke dal
 composer require januar001/xml-seo-sitemap
 ```
 
+### Setup Routing Sitemap (Opsional tapi Direkomendasikan)
+Agar URL `/sitemap.xml` di website Anda otomatis diarahkan ke `/sitemap_index.xml` (persis seperti cara kerja Yoast SEO), jalankan perintah berikut setelah menginstal library:
+
+```bash
+php vendor/bin/seo-setup
+```
+Perintah di atas akan secara aman menambahkan *RewriteRule* ke dalam file `.htaccess` Anda.
+
+**Cara Manual (Jika tidak menggunakan perintah di atas):**
+Jika Anda tidak ingin menjalankan script otomatis, Anda bisa menyalin kode berikut dan menempelkannya secara manual ke dalam file `.htaccess` di *root* direktori web Anda:
+
+```apache
+# Routing Sitemap (Mirip Yoast SEO) oleh januar001/xml-seo-sitemap
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^sitemap\.xml$ sitemap_index.xml [L]
+</IfModule>
+```
+
 ## Cara Menggunakan
 
 Berikut adalah langkah demi langkah cara menggunakan library ini untuk membuat sitemap lengkap beserta styling-nya.

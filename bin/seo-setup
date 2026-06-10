@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists(__DIR__ . '/../../../autoload.php')) {
+    // Dipanggil dari vendor/bin/seo-setup
+    require_once __DIR__ . '/../../../autoload.php';
+} elseif (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    // Dipanggil saat development di dalam library
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
+
+$rootDir = getcwd();
+$htaccessPath = $rootDir . DIRECTORY_SEPARATOR . '.htaccess';
+$ruleToAdd = "\n# Routing Sitemap (Mirip Yoast SEO) oleh januar001/xml-seo-sitemap\n<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteRule ^sitemap\.xml$ sitemap_index.xml [L]\n</IfModule>\n";
+
+echo "Mengecek file .htaccess di: " . $rootDir . "\n";
+
+if (file_exists($htaccessPath)) {
+    $content = file_get_contents($htaccessPath);
+    if (strpos($content, 'RewriteRule ^sitemap\.xml$ sitemap_index.xml [L]') === false) {
+        file_put_contents($htaccessPath, $ruleToAdd, FILE_APPEND);
+        echo "✅ SUKSES: RewriteRule sitemap berhasil ditambahkan ke .htaccess!\n";
+    } else {
+        echo "ℹ️ INFO: RewriteRule sitemap sudah ada di .htaccess. Tidak ada perubahan.\n";
+    }
+} else {
+    file_put_contents($htaccessPath, $ruleToAdd);
+    echo "✅ SUKSES: Membuat file .htaccess baru dan menambahkan RewriteRule sitemap!\n";
+}
