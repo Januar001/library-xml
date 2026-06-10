@@ -13,7 +13,7 @@ Library ini mendukung:
 Gunakan [Composer](https://getcomposer.org/) untuk menginstal library ini ke dalam project PHP Anda:
 
 ```bash
-composer require januar001/seo-sitemap-generator
+composer require januar001/xml-seo-sitemap
 ```
 
 *(Catatan: Anda mungkin harus menyesuaikan perintah di atas setelah library ini dipublikasikan ke Packagist)*
