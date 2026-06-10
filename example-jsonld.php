@@ -17,7 +17,12 @@ $articleJson = $jsonLdBuilder->buildForArticle([
     'description' => 'Panduan lengkap cara memilih sepatu yang nyaman untuk lari dan gaya.',
     'image' => 'https://tokomantap.com/images/sepatu-blog.jpg',
     'datePublished' => '2023-10-27T10:00:00+00:00',
-    'authorName' => 'Budi Susanto'
+    'authorName' => 'Budi Susanto',
+    'breadcrumbs' => [
+        ['name' => 'Home', 'url' => 'https://tokomantap.com'],
+        ['name' => 'Blog', 'url' => 'https://tokomantap.com/blog'],
+        ['name' => 'Cara Memilih Sepatu yang Tepat']
+    ]
 ]);
 
 echo "=== JSON-LD UNTUK ARTIKEL ===\n";
@@ -33,7 +38,12 @@ $productJson = $jsonLdBuilder->buildForProduct([
     'brand' => 'MantapShoes',
     'price' => 550000,
     'priceCurrency' => 'IDR',
-    'availability' => 'https://schema.org/InStock'
+    'availability' => 'https://schema.org/InStock',
+    'breadcrumbs' => [
+        ['name' => 'Home', 'url' => 'https://tokomantap.com'],
+        ['name' => 'Produk', 'url' => 'https://tokomantap.com/produk'],
+        ['name' => 'Sepatu Lari X1 Super Cepat']
+    ]
 ]);
 
 echo "=== JSON-LD UNTUK PRODUK ===\n";

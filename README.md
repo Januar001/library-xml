@@ -103,7 +103,12 @@ $articleJson = $jsonLdBuilder->buildForArticle([
     'description' => 'Panduan lengkap cara memilih sepatu.',
     'image' => 'https://tokomantap.com/images/sepatu.jpg',
     'datePublished' => '2023-10-27T10:00:00+00:00',
-    'authorName' => 'Budi Susanto'
+    'authorName' => 'Budi Susanto',
+    'breadcrumbs' => [
+        ['name' => 'Home', 'url' => 'https://tokomantap.com'],
+        ['name' => 'Blog', 'url' => 'https://tokomantap.com/blog'],
+        ['name' => 'Cara Memilih Sepatu']
+    ]
 ]);
 
 // C. Generate JSON-LD untuk Halaman Produk (Toko Online)
@@ -115,7 +120,12 @@ $productJson = $jsonLdBuilder->buildForProduct([
     'sku' => 'SPT-X1-001',
     'brand' => 'MantapShoes',
     'price' => 550000,
-    'priceCurrency' => 'IDR'
+    'priceCurrency' => 'IDR',
+    'breadcrumbs' => [
+        ['name' => 'Home', 'url' => 'https://tokomantap.com'],
+        ['name' => 'Produk', 'url' => 'https://tokomantap.com/produk'],
+        ['name' => 'Sepatu Lari X1']
+    ]
 ]);
 
 // Anda tinggal meng-echo string JSON tersebut ke dalam tag <script> di HTML:

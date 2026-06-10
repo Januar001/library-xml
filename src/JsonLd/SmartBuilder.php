@@ -5,6 +5,11 @@ use SeoSitemap\JsonLd\Schemas\Organization;
 use SeoSitemap\JsonLd\Schemas\WebPage;
 use SeoSitemap\JsonLd\Schemas\Article;
 use SeoSitemap\JsonLd\Schemas\Product;
+use SeoSitemap\JsonLd\Schemas\BreadcrumbList;
+
+/**
+ * SmartBuilder acts as a facade to automatically generate complex Yoast-like JSON-LD structures.
+ */
 
 class SmartBuilder
 {
@@ -15,6 +20,12 @@ class SmartBuilder
         $this->organization = new Organization($orgName, $orgUrl, $orgLogo);
     }
 
+    /**
+     * Builds a comprehensive JSON-LD Graph for an Article page.
+     * 
+     * @param array $data Expected keys: url, title, description, image, datePublished, authorName, [dateModified, breadcrumbs]
+     * @return string Valid JSON string
+     */
     public function buildForArticle(array $data): string
     {
         $graph = new Graph();
@@ -27,6 +38,14 @@ class SmartBuilder
             $this->organization->toArray()['@id']
         );
         $graph->addSchema($webPage);
+
+        if (isset($data['breadcrumbs']) && is_array($data['breadcrumbs'])) {
+            $breadcrumbList = new BreadcrumbList($data['url']);
+            foreach ($data['breadcrumbs'] as $crumb) {
+                $breadcrumbList->addListItem($crumb['name'], $crumb['url'] ?? null);
+            }
+            $graph->addSchema($breadcrumbList);
+        }
 
         $article = new Article(
             $data['url'],
@@ -42,6 +61,12 @@ class SmartBuilder
         return $graph->toJson();
     }
 
+    /**
+     * Builds a comprehensive JSON-LD Graph for a Product page.
+     * 
+     * @param array $data Expected keys: url, name, description, image, sku, brand, price, [priceCurrency, availability, breadcrumbs]
+     * @return string Valid JSON string
+     */
     public function buildForProduct(array $data): string
     {
         $graph = new Graph();
@@ -54,6 +79,14 @@ class SmartBuilder
             $this->organization->toArray()['@id']
         );
         $graph->addSchema($webPage);
+
+        if (isset($data['breadcrumbs']) && is_array($data['breadcrumbs'])) {
+            $breadcrumbList = new BreadcrumbList($data['url']);
+            foreach ($data['breadcrumbs'] as $crumb) {
+                $breadcrumbList->addListItem($crumb['name'], $crumb['url'] ?? null);
+            }
+            $graph->addSchema($breadcrumbList);
+        }
 
         $product = new Product(
             $data['url'],
