@@ -1,5 +1,5 @@
 {
-    "name": "januar001/library-xml",
+    "name": "januar001/xml-seo-sitemap",
     "description": "A reusable PHP library to generate Yoast-like SEO XML Sitemaps",
     "type": "library",
     "require": {
